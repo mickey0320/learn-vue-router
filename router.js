@@ -13,6 +13,27 @@ export default new VueRouter({
       path: "/",
       component: Home,
     },
-    { path: "/about", component: About },
+    {
+      path: "/about",
+      component: About,
+      children: [
+        {
+          path: "a",
+          component: {
+            render(h) {
+              return h("div");
+            },
+          },
+        },
+        {
+          path: "b",
+          component: {
+            render(h) {
+              return h("div");
+            },
+          },
+        },
+      ],
+    },
   ],
 });
