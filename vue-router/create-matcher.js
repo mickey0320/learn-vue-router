@@ -1,8 +1,19 @@
 import createRouteMap from "./create-route-map";
+import { createRoute } from "./history/base";
 
 export default function createMatcher(routes) {
   let { pathMap } = createRouteMap(routes);
-  function match() {}
+  function match(location) {
+    const record = pathMap[location];
+    if (!record) {
+      return createRoute(null, {
+        path: location,
+      });
+    }
+    return createRoute(route, {
+      path: locationh,
+    });
+  }
 
   function addRoutes(routes) {
     pathMap = createRouteMap(routes, pathMap);
