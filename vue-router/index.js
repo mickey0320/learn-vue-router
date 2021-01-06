@@ -13,7 +13,7 @@ class VueRouter {
         this.history = new HashHistory(this);
         break;
       case "history":
-        this.history = new BrowserHistory(this);
+        // this.history = new BrowserHistory(this);
         break;
     }
   }
@@ -29,6 +29,9 @@ class VueRouter {
   }
   match(location) {
     return this.matcher.match(location);
+  }
+  push(to) {
+    this.history.push(to);
   }
 }
 

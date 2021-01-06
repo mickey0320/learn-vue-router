@@ -2,7 +2,7 @@ export let _Vue;
 import RouterLink from "./components/link";
 import RouterView from "./components/view";
 
-function install(Vue, options) {
+function install(Vue) {
   _Vue = Vue;
 
   Vue.component("router-link", RouterLink);
@@ -22,8 +22,16 @@ function install(Vue, options) {
     },
   });
 
-  Vue.prototype.$router = {};
-  Vue.prototype.$route = {};
+  Object.defineProperty(Vue.prototype, "$router", {
+    get() {
+      return this._routerRoot._router;
+    },
+  });
+  Object.defineProperty(Vue.prototype, "$route", {
+    get() {
+      return this._routerRoot._route;
+    },
+  });
 }
 
 export default install;

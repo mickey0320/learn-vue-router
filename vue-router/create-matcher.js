@@ -10,8 +10,8 @@ export default function createMatcher(routes) {
         path: location,
       });
     }
-    return createRoute(route, {
-      path: locationh,
+    return createRoute(record, {
+      path: location,
     });
   }
 

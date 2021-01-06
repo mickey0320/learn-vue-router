@@ -21,7 +21,7 @@ export default new VueRouter({
           path: "a",
           component: {
             render(h) {
-              return h("div");
+              return h("div", {}, "a");
             },
           },
         },
@@ -29,7 +29,7 @@ export default new VueRouter({
           path: "b",
           component: {
             render(h) {
-              return h("div");
+              return h("div", {}, "b");
             },
           },
         },
