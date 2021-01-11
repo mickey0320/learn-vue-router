@@ -5,6 +5,7 @@ import HashHistory from "./history/hash";
 class VueRouter {
   constructor(options) {
     this.matcher = createMatcher(options.routes || []);
+    this.beforeHooks = [];
 
     const mode = options.mode || "hash";
 
@@ -32,6 +33,9 @@ class VueRouter {
   }
   push(to) {
     this.history.push(to);
+  }
+  beforeEach(fn) {
+    this.beforeHooks.push(fn);
   }
 }
 

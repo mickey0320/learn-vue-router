@@ -12,6 +12,18 @@ export function createRoute(record, location) {
 function getHash() {
   return window.location.hash.slice(1);
 }
+function runQueue(queue, iterator, cb) {
+  function step(index) {
+    if (index >= queue.length) {
+      cb();
+      return;
+    }
+    iterator(queue[index], () => {
+      setp(index + 1);
+    });
+  }
+  step(0);
+}
 class History {
   constructor(router) {
     this.router = router;
@@ -32,8 +44,16 @@ class History {
     if (location === this.current.path && route.matched.length === this.current.matched.length) {
       return;
     }
-    this.updateRoute(route);
-    onComplete && onComplete();
+    const queue = this.router.beforeHooks;
+    function iterator(hook, next) {
+      hook(this.current, route, () => {
+        next();
+      });
+    }
+    runQueue(queue, iterator, () => {
+      this.updateRoute(route);
+      onComplete && onComplete();
+    });
   }
   updateRoute(route) {
     this.current = route;
